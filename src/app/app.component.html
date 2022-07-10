@@ -1,0 +1,47 @@
+<div>
+  <div>
+    <p>{{title}}</p>
+    <form #crudForm="ngForm" (ngSubmit)="postCrud(crudForm)" >
+    <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="crudService.selectedCrud._id" placeholder="_id">
+    <input required type="text" name="set_id" #set_id="ngModel" [(ngModel)]="crudService.selectedCrud.set_id" placeholder="set id">
+    <div *ngIf="set_id.touched">
+      <p style="color:red">set_id is required</p>
+    </div><br/>
+    <input required type="text" name="task_title" #task_title="ngModel" [(ngModel)]="crudService.selectedCrud.task_title" placeholder="task title">
+    <div *ngIf="task_title.touched">
+      <p style="color:red">title is required</p>
+    </div><br/>
+    <input required type="text" name="task_description" #task_description="ngModel" [(ngModel)]="crudService.selectedCrud.task_description" placeholder="task description">
+    <div *ngIf="task_description.touched">
+      <p style="color:red">description is required</p>
+    </div><br/>
+    <input type="datetime-local" name="data_time" #date_time="ngModel" [(ngModel)]="crudService.selectedCrud.date_time" placeholder="data time">
+    <button type="submit">Submit</button>  
+  </form>
+  </div>
+  <div>
+    <table>
+      <thead>
+        <th>id</th>
+        <th>set_id</th>
+        <th>task_title</th>
+        <th>task_description</th>
+        <th>data_time</th>
+        <th>edit</th>
+        <th>delete</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let i of crudService.cruds1">
+          
+          <td>{{i._id}}</td>
+          <td>{{i.set_id}}</td>
+          <td>{{i.task_title}}</td>
+          <td>{{i.task_description}}</td>
+          <td>{{i.date_time}}</td>
+          <td><button (click)="putCrud(i)" >Edit user</button></td>
+          <td><button (click)="deleteCrud(i._id)" >Delete user</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
